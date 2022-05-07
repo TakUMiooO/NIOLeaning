@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+import java.util.Scanner;
 
 /**
  * @className：groupChatClient
@@ -77,7 +78,9 @@ public class groupChatClient {
     //最后一步：如何使用服务端
     //主要利用线程技术
     public static void main(String[] args) throws IOException {
-        //
+        //创建客户端实例
+        //创建客户端实例
+        log.info("群聊系统客户端开始启动！！！！");
         groupChatClient groupChatClient = new groupChatClient();
         //启动一个线程
         //每隔3秒读取从服务器发送的数据
@@ -93,7 +96,11 @@ public class groupChatClient {
         }.start();
 
         //发送数据给服务器端
-
+        val scanner = new Scanner(System.in);
+        while (scanner.hasNextLine()){
+            val nextLine = scanner.nextLine();
+            groupChatClient.sendMsgToServer(nextLine);
+        }
 
 
     }

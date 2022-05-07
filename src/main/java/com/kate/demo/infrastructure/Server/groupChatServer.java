@@ -143,6 +143,9 @@ public class groupChatServer {
     }
 
     public static void main(String[] args) {
+        val groupChatServer = new groupChatServer();
+        log.info("群聊系统服务器开始监听！！！");
+        groupChatServer.listen();
 
     }
 }
