@@ -28,12 +28,12 @@ public class groupChatClient {
     String HOST = "10.30.26.94";
     private Selector selector;
     private SocketChannel socketChannel;
-    private String userName=null;
+    private String userName = null;
 
     //构造器，完成初始化工作
     public groupChatClient() throws IOException {
         selector = Selector.open();
-        socketChannel.open(new InetSocketAddress(HOST,PORT));
+        socketChannel.open(new InetSocketAddress(HOST, PORT));
         socketChannel.configureBlocking(false);
         socketChannel.register(selector, SelectionKey.OP_READ);
         //得到username
@@ -51,16 +51,50 @@ public class groupChatClient {
     }
 
     //读取从服务器转发过来的消息
-    public void getMsgFromOtherClient(){
+    public void getMsgFromOtherClient() {
         try {
-
+            if (selector.select() > 0) {
+                val iterator = selector.selectedKeys().iterator();
+                while (iterator.hasNext()) {
+                    val next = iterator.next();
+                    if (next.isReadable()) {
+                        SocketChannel socketChannel = (SocketChannel) next.channel();
+                        val byteBuffer = ByteBuffer.allocate(1024);
+                        socketChannel.read(byteBuffer);
+                        log.info(socketChannel.getRemoteAddress() + "::userName::" + userName + "::content is " + new String(byteBuffer.array()));
+                    }
+                }
+            } else {
+                log.info("没有可用的通道进行数据交互");
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
     }
 
-    public static void main(String[] args) {
+
+    //最后一步：如何使用服务端
+    //主要利用线程技术
+    public static void main(String[] args) throws IOException {
+        //
+        groupChatClient groupChatClient = new groupChatClient();
+        //启动一个线程
+        //每隔3秒读取从服务器发送的数据
+        new Thread(){
+            public void run(){
+                groupChatClient.getMsgFromOtherClient();
+                try {
+                    Thread.currentThread().sleep(3000);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }.start();
+
+        //发送数据给服务器端
+
+
 
     }
 }
