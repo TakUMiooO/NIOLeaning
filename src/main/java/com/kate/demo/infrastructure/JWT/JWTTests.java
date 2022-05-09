@@ -1,8 +1,6 @@
 package com.kate.demo.infrastructure.JWT;
 
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -10,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 import java.util.UUID;
+import java.util.function.BiConsumer;
 
 /**
  * @className：JWTTests
@@ -59,4 +58,22 @@ public class JWTTests {
         System.out.println(jwtToken);
     }
 
+    @Test
+    public void decodeJWT() {
+
+        String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6InBldGVyX2NoZW4iLCJhdHRyaWJ1dGVzIjoiaHVzYmFuZCIsInJvbGUiOiJib3kiLCJzdWIiOiJzdXBjb24tdXNlciIsImlzcyI6InN1cGNvbi1xaWFuZmF6aGUiLCJhdWQiOiJhY2NwZXRlciIsImlhdCI6MTY1MjA4NDI0MywiZXhwIjoxNjUyMDg0MzAzLCJuYmYiOjE2NTIwODQyNjMsImp0aSI6ImZjODg1YWYyLWY3ZjctNDljNy1iZmY1LTkyZWQ0MTczNjk3NyJ9.QxMlWDCUjtUVICpFtEa5qpCE8bTLsQ_H1VhRZNKw3S0";
+
+        val jwtParser = Jwts.parser();
+
+        log.info("start parser...");
+        //parseClaimsJws会报错，是因为生成的token过期了
+        Jws<Claims> claimsJws = jwtParser.setSigningKey(tokenSignKey).parseClaimsJws(token);
+        val body = claimsJws.getBody();
+        String role = (String) body.get("role");
+        val id = body.getId();
+        System.out.println(id);
+        System.out.println(role);
+
+
+    }
 }
