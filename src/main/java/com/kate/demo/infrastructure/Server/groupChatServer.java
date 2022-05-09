@@ -24,7 +24,7 @@ public class groupChatServer {
     private Selector selector;
     private ServerSocketChannel listenChannel;
     @Getter
-    private int port = 6667;
+    int port = 6667;
 
     //初始化工作
     public groupChatServer() {
@@ -50,7 +50,7 @@ public class groupChatServer {
             //循环处理
             while (true) {
                 val i = selector.select(2000);
-                log.info("2秒阻塞持续监听中。。。。");
+                //log.info("2秒阻塞持续监听中。。。。");
                 if (i > 0) {
                     //当出现IO事件的时候
                     val selectionKeys = selector.selectedKeys();
@@ -79,7 +79,7 @@ public class groupChatServer {
                         iterator.remove();
                     }
                 } else {
-                    log.info("监听器监听IO事件中，请等待。。。。。。");
+                   // log.info("监听器监听IO事件中，请等待。。。。。。");
                 }
             }
         } catch (Exception e) {

@@ -34,7 +34,7 @@ public class groupChatClient {
     //构造器，完成初始化工作
     public groupChatClient() throws IOException {
         selector = Selector.open();
-        socketChannel.open(new InetSocketAddress(HOST, PORT));
+        socketChannel = socketChannel.open(new InetSocketAddress(HOST, PORT));
         socketChannel.configureBlocking(false);
         socketChannel.register(selector, SelectionKey.OP_READ);
         //得到username
@@ -81,6 +81,7 @@ public class groupChatClient {
         //创建客户端实例
         //创建客户端实例
         log.info("群聊系统客户端开始启动！！！！");
+
         groupChatClient groupChatClient = new groupChatClient();
         //启动一个线程
         //每隔3秒读取从服务器发送的数据
