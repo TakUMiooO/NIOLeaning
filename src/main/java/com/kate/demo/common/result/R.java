@@ -64,5 +64,13 @@ public class R {
         return r;
     }
 
+    //上面是为了当将程序运行结果返回出统一的状态码
+    //下面的代码是为了将程序运行结果的数据返回给统一返回结果
+
+    public  R data(String key, Object value) {
+        this.data.put(key, value);
+        return this;
+    }
+
 
 }
