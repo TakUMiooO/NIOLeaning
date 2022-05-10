@@ -38,6 +38,13 @@ public class UnifiedExceptionHandler {
     //有没有简洁的异常定义呢？那就是自定义异常！
     //目标使用一个或较少的异常类，可以捕获和显示所有的异常信息
     //创建一个自定义的异常类，在程序中抛出这个自定义异常对象(必须是运行时异常)，并在统一异常处理器种捕获自定义异常对象
+    //首先先定义一个新的自定义异常kateException
+    //将自定义的异常放入这个统一异常管理类，当扫描到异常后，自动定位在这里
+    @ExceptionHandler(value = kateException.class)
+    public R handleException(kateException e){
+        log.error(e.getMessage(), e);
+        return R.error().message(e.getMessage()).code(e.getCode());
+    }
 
 
 

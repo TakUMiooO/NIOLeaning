@@ -54,6 +54,10 @@ public enum ResponseEnum {
     WEIXIN_CALLBACK_PARAM_ERROR(-601, "回调参数不正确"),
     WEIXIN_FETCH_ACCESSTOKEN_ERROR(-602, "获取access_token失败"),
     WEIXIN_FETCH_USERINFO_ERROR(-603, "获取用户信息失败"),
+
+    KATE_DEFINE_EXCEPTION_ERROR(-1030,"卡特自定义的exception"),
+    KATE_DEFINE_ASSERT_ERROR(-1031,"卡特自定义的Assert断言")
+
             ;
     //响应状态码
     private Integer code;
