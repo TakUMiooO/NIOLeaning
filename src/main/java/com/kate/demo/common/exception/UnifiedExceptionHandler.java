@@ -33,5 +33,13 @@ public class UnifiedExceptionHandler {
         log.error(e.getMessage(),e);
         return R.setResult(ResponseEnum.BAD_SQL_GRAMMAR_ERROR);
     }
+    //第一种异常报错，太宽泛，就算报错了 也不知道发生了什么异常
+    //而第二种异常报错，太复杂，如果每种异常都需要自己详细定义，是不合理的
+    //有没有简洁的异常定义呢？那就是自定义异常！
+    //目标使用一个或较少的异常类，可以捕获和显示所有的异常信息
+    //创建一个自定义的异常类，在程序中抛出这个自定义异常对象(必须是运行时异常)，并在统一异常处理器种捕获自定义异常对象
+
+
+
 
 }
