@@ -58,7 +58,7 @@ public class JWTTests {
         System.out.println(jwtToken);
     }
 
-    @Test
+    //@Test
     public void decodeJWT() {
 
         String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6InBldGVyX2NoZW4iLCJhdHRyaWJ1dGVzIjoiaHVzYmFuZCIsInJvbGUiOiJib3kiLCJzdWIiOiJzdXBjb24tdXNlciIsImlzcyI6InN1cGNvbi1xaWFuZmF6aGUiLCJhdWQiOiJhY2NwZXRlciIsImlhdCI6MTY1MjA4NDI0MywiZXhwIjoxNjUyMDg0MzAzLCJuYmYiOjE2NTIwODQyNjMsImp0aSI6ImZjODg1YWYyLWY3ZjctNDljNy1iZmY1LTkyZWQ0MTczNjk3NyJ9.QxMlWDCUjtUVICpFtEa5qpCE8bTLsQ_H1VhRZNKw3S0";

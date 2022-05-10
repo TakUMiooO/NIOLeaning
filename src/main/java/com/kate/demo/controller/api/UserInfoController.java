@@ -25,7 +25,9 @@ public class UserInfoController {
     @Operation(summary = "测试统一返回值getString")
     @GetMapping("/getString")
     public R getString(){
-        return R.ok().data("getString","统一返回值的结果！！！");
+        //为什么可以一直连点下去，因为每个方法的返回值都是同一个R
+        //所以连点都在同一个R上，并且每个方法都会完成
+        return R.ok().data("getString","统一返回值的结果！！！").code(888888888).message("统一返回值设置了特定的返回消息");
     }
 
 }

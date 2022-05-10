@@ -16,7 +16,6 @@ import java.util.Map;
  */
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class R {
     //定义统一的返回的基本数据格式
     //成功 & 失败
@@ -30,7 +29,7 @@ public class R {
     //通过类的内部进行调用
     /*
      * @name: ok
-     * @description: 返回成功的结果
+     * @description: TODO 返回成功的结果
      */
     private R() {
     }
@@ -44,7 +43,7 @@ public class R {
 
     /*
      * @name: error
-     * @description: 返回失败的结果
+     * @description: TODO 返回失败的结果
      */
     public static R error() {
         R r = new R();
@@ -55,7 +54,7 @@ public class R {
 
     /*
      * @name:
-     * @description: 设置特定的枚举值
+     * @description: TODO 设置特定的枚举值
      */
     public static R setResult(ResponseEnum responseEnum) {
         R r = new R();
@@ -67,8 +66,34 @@ public class R {
     //上面是为了当将程序运行结果返回出统一的状态码
     //下面的代码是为了将程序运行结果的数据返回给统一返回结果
 
+    /*
+     * @name: data
+     * @description: TODO 设置特定的返回数据
+    */
     public  R data(String key, Object value) {
         this.data.put(key, value);
+        return this;
+    }
+    //@description: TODO data方法的重载
+    public  R data(Map<String,Object> map) {
+        this.setData(map);
+        return this;
+    }
+    /*
+     * @name:
+     * @description: TODO 设置特定的响应消息
+    */
+    public R message(String message){
+        this.setMessage(message);
+        return this;
+    }
+
+    /*
+     * @name:
+     * @description: TODO 设置特定的响应码
+     */
+    public R code(Integer code){
+        this.setCode(code);
         return this;
     }
 
