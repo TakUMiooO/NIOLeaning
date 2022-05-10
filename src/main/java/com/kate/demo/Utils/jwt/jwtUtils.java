@@ -25,7 +25,7 @@ import java.util.Date;
 public class jwtUtils {
 
     @Getter
-    private static long tokenExpiration = 24*1000*60;
+    private static long tokenExpiration = 24 * 1000 * 60;
     @Getter
     private static String tokenSignKey = "supcon123456";
 
@@ -39,13 +39,6 @@ public class jwtUtils {
     private static Key getKeyInstance() {
         return new SecretKeySpec(DatatypeConverter.parseBase64Binary(tokenSignKey), SignatureAlgorithm.HS512.getJcaName());
     }
-
-    /*
-     * @name: createToken
-     * @description: TODO
-     * @date: 2022/5/9 16:49
-     * @auther: Asuma
-     */
     public static String createToken(Long userID, String userName) {
         val jwtBuilder = Jwts.builder();
         String token = jwtBuilder
@@ -59,21 +52,14 @@ public class jwtUtils {
                 .compact();
         return token;
     }
-
-    /*
-     * @name: checkToken
-     * @description: TODO
-     * @date: 2022/5/9 16:55
-     * @auther: Asuma
-     */
     public static boolean checkToken(String token) {
         if (StringUtils.isEmpty(token)) {
             log.info("token为空");
             return false;
         }
         try {
-            log.info("成功提取token");
             Jwts.parser().setSigningKey(getKeyInstance()).parseClaimsJws(token);
+            log.info("成功提取token");
             return true;
         } catch (Exception e) {
             log.info("token异常");
@@ -93,12 +79,6 @@ public class jwtUtils {
         return false;
     }
 
-    /*
-     * @name: getClaims
-     * @description: 根据算法解析JWT
-     * @date: 2022/5/9 17:22
-     * @auther: Asuma
-     */
     private static Claims getClaims(String token) throws Exception {
         if (StringUtils.isEmpty(token)) {
             log.info("token为空");
